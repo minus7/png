@@ -1,0 +1,5 @@
+This is a small Python 3 library to load PNG chunks and manipulate them.
+
+There is very limited handling of the actual content of the chunks which
+also means that not much verification for correctness is done.
+Encoding/decoding of basic image data (zlib and filters) is supported.
