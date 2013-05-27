@@ -39,7 +39,7 @@ class PNG(object):
 			(chunk_length, chunk_name) = struct.unpack("!I4s", data[chunk_start:chunk_start+8])
 			chunk_end = chunk_start + chunk_length + 12
 			L.debug("Processing {} chunk data {}-{}".format(chunk_name, chunk_start, chunk_end))
-			chunk = chunk_map.get(chunk_name, None).load(data[chunk_start:chunk_end])
+			chunk = chunk_map.get(chunk_name, chunks.Chunk).load(data[chunk_start:chunk_end])
 			L.debug("New chunk: {}".format(chunk))
 			inst.chunks.append(chunk)
 			chunk_start = chunk_end

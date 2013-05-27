@@ -96,7 +96,7 @@ class Chunk(object):
 
 	# name helper methods
 
-	def ancillary(set=None):
+	def ancillary(self, set=None):
 		"""Set and get ancillary=True/critical=False bit"""
 		if set is True:
 			self.name[0] = self.name[0].lower()
@@ -104,7 +104,7 @@ class Chunk(object):
 			self.name[0] = self.name[0].upper()
 		return self.name[0].islower()
 
-	def private(set=None):
+	def private(self, set=None):
 		"""Set and get private=True/public=False bit"""
 		if set is True:
 			self.name[1] = self.name[1].lower()
@@ -112,7 +112,7 @@ class Chunk(object):
 			self.name[1] = self.name[1].upper()
 		return self.name[1].islower()
 
-	def reserved(set=None):
+	def reserved(self, set=None):
 		"""Set and get reserved_valid=True/invalid=False bit"""
 		if set is True:
 			self.name[2] = self.name[2].upper()
@@ -120,7 +120,7 @@ class Chunk(object):
 			self.name[2] = self.name[2].lower()
 		return self.name[2].isupper()
 
-	def safe_to_copy(set=None):
+	def safe_to_copy(self, set=None):
 		"""Set and get save_to_copy=True/unsafe=False bit"""
 		if set is True:
 			self.name[3] = self.name[3].lower()
@@ -144,12 +144,17 @@ class IHDR(Chunk):
 	http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html#C.IHDR
 	"""
 	# color types with name & allowed bit depths
+	COLOR_TYPE_GRAY  = 0
+	COLOR_TYPE_RGB   = 2
+	COLOR_TYPE_PLTE  = 3
+	COLOR_TYPE_GRAYA = 4
+	COLOR_TYPE_RGBA  = 6
 	color_types = {
-		0: ("Grayscale", (1,2,4,8,16)),
-		2: ("RGB", (8,16)),
-		3: ("Palette", (1,2,4,8)),
-		4: ("Greyscale+Alpha", (8,16)),
-		6: ("RGBA", (8,16)),
+		COLOR_TYPE_GRAY:	("Grayscale", (1,2,4,8,16)),
+		COLOR_TYPE_RGB:		("RGB", (8,16)),
+		COLOR_TYPE_PLTE:	("Palette", (1,2,4,8)),
+		COLOR_TYPE_GRAYA:	("Greyscale+Alpha", (8,16)),
+		COLOR_TYPE_RGBA:	("RGBA", (8,16)),
 	}
 
 	def __init__(self, width=0, height=0, bit_depth=8, color_type=2, \
